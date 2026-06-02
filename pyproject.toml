@@ -1,0 +1,87 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "lessish"
+version = "0.1.0"
+description = "Pure-Python Less CSS → CSS compiler"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.11"
+authors = [{ name = "Andy Smith" }]
+keywords = ["less", "css", "compiler", "transpiler"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Software Development :: Compilers",
+    "Topic :: Text Processing :: Markup",
+]
+# Stdlib-only by design.
+dependencies = []
+
+[project.scripts]
+lessish = "lessish.cli:main"
+
+[project.optional-dependencies]
+dev = ["ruff>=0.5", "mypy>=1.10"]
+
+[project.urls]
+Homepage = "https://github.com/uandysmith/lessish"
+Documentation = "https://uandysmith.github.io/lessish/"
+Repository = "https://github.com/uandysmith/lessish"
+Issues = "https://github.com/uandysmith/lessish/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/lessish"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/lessish", "README.md", "LICENSE", "docs", "pyproject.toml"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+files = ["src/lessish"]
+
+[tool.ruff]
+line-length = 120
+indent-width = 4
+target-version = "py311"
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "UP",  # pyupgrade
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    # TYPE_CHECKING-only blocks hold type imports and Protocol stubs that
+    # never run at runtime.
+    "if TYPE_CHECKING:",
+    # `__main__` guards on modules whose CLI path is exercised by
+    # integration tests rather than unit tests.
+    'if __name__ == .__main__.:',
+    # Setting `exclude_lines` drops coverage's built-in default, so
+    # restore it. Marks unreachable internal-invariant guards.
+    'pragma: no cover',
+]

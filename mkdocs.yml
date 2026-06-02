@@ -1,0 +1,75 @@
+site_name: lessish
+site_description: Pure-Python Less → CSS compiler, linter, and formatter
+# TODO: replace OWNER with the GitHub account/org once lessish has a repo.
+site_url: https://OWNER.github.io/lessish/
+repo_url: https://github.com/OWNER/lessish
+repo_name: lessish
+
+docs_dir: docs
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.tracking
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+
+nav:
+  - Home: index.md
+  - Philosophy: philosophy.md
+  - Embedding:
+      - 1. Quickstart: guide/01-quickstart.md
+      - 2. Options: guide/02-options.md
+      - 3. Source maps: guide/03-source-maps.md
+      - 4. The pipeline: guide/04-pipeline.md
+      - 5. Errors: guide/05-errors.md
+  - Linter & formatter:
+      - 1. Overview: linter/01-overview.md
+      - 2. Configuration: linter/02-configuration.md
+      - 3. Rules: linter/03-rules.md
+      - 4. Programmatic API: linter/04-api.md
+  - CLI: cli.md
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - pymdownx.details
+  - attr_list
+  - def_list
+  - tables
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+plugins:
+  - search
+
+# check_examples.py is not a page, but it is linked from the docs and is
+# handy to read, so let MkDocs copy it into the site as a static file rather
+# than excluding it.
+not_in_nav: |
+  check_examples.py

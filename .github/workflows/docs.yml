@@ -1,0 +1,28 @@
+name: Deploy docs
+
+# Builds the MkDocs site from docs/ and publishes it to the gh-pages branch.
+# Lives in lessish/.github/ so it is correctly placed once lessish splits
+# into its own repository (GitHub only runs workflows from .github/workflows
+# at the repo root).
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      # Install lessish itself so the documentation examples can run, plus
+      # MkDocs + the Material theme to build the site.
+      - run: pip install . mkdocs mkdocs-material
+      # Fail the build if any documented example has drifted from behaviour.
+      - run: python docs/check_examples.py
+      - run: mkdocs gh-deploy --force
