@@ -1,0 +1,1657 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Pure-Python Less → CSS compiler, linter, and formatter">
+      
+      
+      
+        <link rel="canonical" href="https://OWNER.github.io/lessish/guide/02-options/">
+      
+      
+        <link rel="prev" href="../01-quickstart/">
+      
+      
+        <link rel="next" href="../03-source-maps/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>2. Options - lessish</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#embedding-options" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="lessish" class="md-header__button md-logo" aria-label="lessish" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            lessish
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              2. Options
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/OWNER/lessish" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    lessish
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../philosophy/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Philosophy
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../01-quickstart/" class="md-tabs__link">
+          
+  
+  
+  Embedding
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../linter/01-overview/" class="md-tabs__link">
+          
+  
+  
+  Linter & formatter
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../cli/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  CLI
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="lessish" class="md-nav__button md-logo" aria-label="lessish" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    lessish
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/OWNER/lessish" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    lessish
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../philosophy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Philosophy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Embedding
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Embedding
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Options
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Options
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-full-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The full set
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#injecting-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Injecting variables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#math-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Math modes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#strict-units" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Strict units
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#banner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Banner
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file_io-sandbox" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        file_io sandbox
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="file_io sandbox">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jail-is-not-no-disk-access-know-your-jail-root" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        'jail' is not "no disk access" — know your jail root
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dos-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DoS limits
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hardened-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hardened mode
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hardened mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#one-preset-lessishhardened" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        One preset: Lessish.hardened()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paths-and-import" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        paths and @import
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-source-maps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Source maps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. The pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-errors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Errors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linter & formatter
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Linter & formatter
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linter/01-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linter/02-configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linter/03-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Rules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linter/04-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Programmatic API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-full-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The full set
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#injecting-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Injecting variables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#math-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Math modes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#strict-units" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Strict units
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#banner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Banner
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file_io-sandbox" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        file_io sandbox
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="file_io sandbox">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jail-is-not-no-disk-access-know-your-jail-root" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        'jail' is not "no disk access" — know your jail root
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dos-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DoS limits
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hardened-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hardened mode
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hardened mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#one-preset-lessishhardened" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        One preset: Lessish.hardened()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paths-and-import" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        paths and @import
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="embedding-options">Embedding · Options</h1>
+<p>Every option can be set on the constructor (becomes the default for all
+compiles) or passed per-call (overrides the default for that call). Names
+mirror <code>less.js</code>, snake-cased. What each option <em>does</em> to the Less is
+defined by <code>less.js</code> — see <a href="https://lesscss.org/usage/">lesscss.org</a>; this
+page is about the Python surface.</p>
+<h2 id="the-full-set">The full set</h2>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Type</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>filename</code></td>
+<td><code>str</code></td>
+<td>Logical path; base for <code>@import</code> resolution and source-map <code>sources[]</code>.</td>
+</tr>
+<tr>
+<td><code>paths</code></td>
+<td><code>list[str]</code></td>
+<td>Extra <code>@import</code> search dirs.</td>
+</tr>
+<tr>
+<td><code>process_imports</code></td>
+<td><code>bool</code></td>
+<td>Splice imports before eval.</td>
+</tr>
+<tr>
+<td><code>global_vars</code></td>
+<td><code>dict[str, str]</code></td>
+<td>Prepended as <code>@name: value;</code>; user code can override them.</td>
+</tr>
+<tr>
+<td><code>modify_vars</code></td>
+<td><code>dict[str, str]</code></td>
+<td>Appended; overrides user code.</td>
+</tr>
+<tr>
+<td><code>banner</code></td>
+<td><code>str</code></td>
+<td>Verbatim string prefix on the emitted CSS.</td>
+</tr>
+<tr>
+<td><code>compress</code></td>
+<td><code>bool</code></td>
+<td>Single-line, no-whitespace output.</td>
+</tr>
+<tr>
+<td><code>rewrite_urls</code></td>
+<td><code>'all' \| 'local' \| 'off'</code></td>
+<td><code>url(…)</code> rewriting in imported files.</td>
+</tr>
+<tr>
+<td><code>rootpath</code></td>
+<td><code>str</code></td>
+<td>Prefix prepended to every <code>url(…)</code> at emit.</td>
+</tr>
+<tr>
+<td><code>url_args</code></td>
+<td><code>str</code></td>
+<td>Query string appended to every <code>url(…)</code>. Data URIs exempt.</td>
+</tr>
+<tr>
+<td><code>strict_units</code></td>
+<td><code>bool</code></td>
+<td>Compound-unit arithmetic raises.</td>
+</tr>
+<tr>
+<td><code>math</code></td>
+<td><code>'always' \| 'parens-division' \| 'parens'</code></td>
+<td>Plus the numeric aliases <code>less.js</code> accepts.</td>
+</tr>
+<tr>
+<td><code>source_map</code></td>
+<td><code>bool \| dict</code></td>
+<td><code>True</code> or an options dict enables map emission. See <a href="../03-source-maps/">03-source-maps.md</a>.</td>
+</tr>
+<tr>
+<td><code>strict_imports</code></td>
+<td><code>bool</code></td>
+<td>Accepted but a no-op — mirrors <code>less.js</code>'s own deprecated handling.</td>
+</tr>
+<tr>
+<td><code>file_io</code></td>
+<td><code>'allow' \| 'jail' \| 'deny'</code></td>
+<td>Filesystem-read sandbox. Default <code>'jail'</code>. See <a href="#file_io-sandbox">below</a>.</td>
+</tr>
+<tr>
+<td><code>mixin_depth_limit</code> / <code>mixin_total_limit</code></td>
+<td><code>int \| None</code></td>
+<td>DoS backstops on mixin invocation. <code>None</code> → built-in defaults. See <a href="#dos-limits">DoS limits</a>.</td>
+</tr>
+<tr>
+<td><code>interp_expansion_limit</code></td>
+<td><code>int</code></td>
+<td>Max bytes one <code>@{var}</code> interpolation may expand to (billion-laughs guard). Default 1 MB.</td>
+</tr>
+<tr>
+<td><code>replace_input_limit</code></td>
+<td><code>int</code></td>
+<td>Max pattern/subject length for the <code>replace()</code> function (ReDoS bound). Default 100 000.</td>
+</tr>
+<tr>
+<td><code>range_max_elements</code></td>
+<td><code>int</code></td>
+<td>Max element count <code>range()</code> may generate (memory-blowup guard). Default 1 000 000.</td>
+</tr>
+<tr>
+<td><code>max_eval_seconds</code></td>
+<td><code>float \| None</code></td>
+<td>Wall-clock evaluation deadline, checked <strong>throughout evaluation</strong> (the cycle trampoline, the per-declaration path, and mixin invocation). <code>None</code> → off. Catches exponential mixin expansion <em>and</em> a large flat mixin-free workload the count limit lets run for seconds; it does <strong>not</strong> interrupt a single uninterruptible operation (e.g. a catastrophic <code>replace()</code> regex) — disable <code>replace</code> for that. See <a href="#dos-limits">DoS limits</a>.</td>
+</tr>
+<tr>
+<td><code>max_output_size</code></td>
+<td><code>int \| None</code></td>
+<td>Max emitted CSS size in bytes. <code>None</code> → off. Bounds output amplification (a small mixin body splatted to megabytes). See <a href="#dos-limits">DoS limits</a>.</td>
+</tr>
+<tr>
+<td><code>max_input_size</code></td>
+<td><code>int \| None</code></td>
+<td>Max <strong>cumulative</strong> parser input in characters — entry source plus every imported file — checked before lexing. <code>None</code> → off. Bounds the one phase the wall-clock deadline doesn't: parsing is O(n) and runs ahead of evaluation. See <a href="#dos-limits">DoS limits</a>.</td>
+</tr>
+<tr>
+<td><code>disabled_functions</code></td>
+<td><code>Iterable[str] \| None</code></td>
+<td>Built-in functions to refuse at call time. <code>None</code> → none disabled. A name that isn't a real built-in raises <code>ValueError</code> (catches typos that would silently disable nothing). See <a href="#hardened-mode">Hardened mode</a>.</td>
+</tr>
+<tr>
+<td><code>neutralize_escape</code></td>
+<td><code>bool</code></td>
+<td>CSS-escape every <code>&lt;/</code> in the final output so compiled CSS can't break out of an inlined HTML <code>&lt;style&gt;</code> — covers values, selectors, property names, comments, and at-rule preludes. Default <code>False</code> (less.js emits raw). See <a href="#hardened-mode">Hardened mode</a>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="injecting-variables">Injecting variables</h2>
+<p><code>global_vars</code> is prepended to the source — user code may override it.
+<code>modify_vars</code> is appended — it overrides user code. This mirrors <code>less.js</code>'s
+<code>globalVars</code> / <code>modifyVars</code>.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">lessish</span><span class="w"> </span><span class="kn">import</span> <span class="n">Lessish</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">ls</span> <span class="o">=</span> <span class="n">Lessish</span><span class="p">()</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># global_vars seeds a default the source can override.</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">seeded</span> <span class="o">=</span> <span class="n">ls</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;.a { color: @c; }&#39;</span><span class="p">,</span> <span class="n">global_vars</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="s1">&#39;blue&#39;</span><span class="p">})</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># =&gt; &#39;.a {\n  color: blue;\n}\n&#39;</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">overridden</span> <span class="o">=</span> <span class="n">ls</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;@c: green; .a { color: @c; }&#39;</span><span class="p">,</span> <span class="n">global_vars</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="s1">&#39;blue&#39;</span><span class="p">})</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="c1"># =&gt; &#39;.a {\n  color: green;\n}\n&#39;</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="c1"># modify_vars always wins.</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="n">forced</span> <span class="o">=</span> <span class="n">ls</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;@c: green; .a { color: @c; }&#39;</span><span class="p">,</span> <span class="n">modify_vars</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="s1">&#39;blue&#39;</span><span class="p">})</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="c1"># =&gt; &#39;.a {\n  color: blue;\n}\n&#39;</span>
+</span></code></pre></div>
+<h2 id="math-modes">Math modes</h2>
+<p><code>math</code> controls when arithmetic evaluates. The default is
+<code>'parens-division'</code>: <code>+</code>, <code>-</code>, <code>*</code> always evaluate, but division only inside
+parentheses.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">lessish</span><span class="w"> </span><span class="kn">import</span> <span class="n">Lessish</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">ls</span> <span class="o">=</span> <span class="n">Lessish</span><span class="p">()</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1"># Division left alone in the default mode.</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">ls</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;.a { w: 6px / 2; }&#39;</span><span class="p">)</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1"># =&gt; &#39;.a {\n  w: 6px / 2;\n}\n&#39;</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c1"># &#39;always&#39; evaluates everything.</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="n">ls</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;.a { w: 6px / 2; }&#39;</span><span class="p">,</span> <span class="n">math</span><span class="o">=</span><span class="s1">&#39;always&#39;</span><span class="p">)</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="c1"># =&gt; &#39;.a {\n  w: 3px;\n}\n&#39;</span>
+</span></code></pre></div>
+<h2 id="strict-units">Strict units</h2>
+<p>With <code>strict_units=True</code>, arithmetic that produces an incoherent compound
+unit raises instead of silently producing it. The error is an
+<code>OperationError</code> (a subclass of <code>LessError</code>):</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">lessish</span><span class="w"> </span><span class="kn">import</span> <span class="n">Lessish</span><span class="p">,</span> <span class="n">OperationError</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">ls</span> <span class="o">=</span> <span class="n">Lessish</span><span class="p">()</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1"># Without strict units, px*px just yields a number with a px unit.</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="n">ls</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;.a { w: 2px * 2px; }&#39;</span><span class="p">)</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1"># =&gt; &#39;.a {\n  w: 4px;\n}\n&#39;</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="k">try</span><span class="p">:</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="n">ls</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;.a { w: 2px * 2px; }&#39;</span><span class="p">,</span> <span class="n">strict_units</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="n">raised</span> <span class="o">=</span> <span class="kc">False</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="k">except</span> <span class="n">OperationError</span><span class="p">:</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="n">raised</span> <span class="o">=</span> <span class="kc">True</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="k">assert</span> <span class="n">raised</span>
+</span></code></pre></div>
+<h2 id="banner">Banner</h2>
+<p><code>banner</code> is emitted verbatim ahead of the CSS — handy for license headers.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">lessish</span><span class="w"> </span><span class="kn">import</span> <span class="n">Lessish</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">Lessish</span><span class="p">()</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;.a { color: red; }&#39;</span><span class="p">,</span> <span class="n">banner</span><span class="o">=</span><span class="s1">&#39;/*! v1 */</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># =&gt; &#39;/*! v1 */\n.a {\n  color: red;\n}\n&#39;</span>
+</span></code></pre></div>
+<h2 id="file_io-sandbox"><code>file_io</code> sandbox</h2>
+<p>Less source can read local files — <code>@import</code>, <code>@import (inline)</code>,
+<code>data-uri()</code>, <code>image-size()</code>, and friends. <code>file_io</code> chooses the policy:</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>'jail'</code> (default)</td>
+<td>Confines reads to the <strong>jail root</strong> (see below) and <code>paths</code>; absolute paths and <code>..</code>-escapes raise <code>SecurityError</code>.</td>
+</tr>
+<tr>
+<td><code>'allow'</code></td>
+<td>Any file the process can read. Mirrors <code>less.js</code>. Emits a <code>LessishSecurityWarning</code> on <strong>every</strong> compile that selects it (so the risk stays visible). Silence it deliberately with <code>warnings.filterwarnings('ignore', category=LessishSecurityWarning)</code>.</td>
+</tr>
+<tr>
+<td><code>'deny'</code></td>
+<td>Blocks every read sink outright. The only value that allows <strong>no</strong> disk read.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="jail-is-not-no-disk-access-know-your-jail-root"><code>'jail'</code> is not "no disk access" — know your jail root</h3>
+<p><code>'jail'</code> means <em>reads are confined to the jail root</em>, not <em>reads are
+blocked</em>. The root is derived from <code>filename</code>:</p>
+<ul>
+<li><strong><code>filename</code> unset</strong> (the default <code>'&lt;input&gt;'</code>, or a bare name like
+  <code>'foo.less'</code>) → root is the <strong>current working directory</strong>. Everything
+  under the process CWD is readable.</li>
+<li><strong><code>filename</code> is a path with a directory</strong> (<code>'/srv/app/styles/main.less'</code>)
+  → root is that directory (<code>/srv/app/styles</code>).</li>
+<li><code>paths=[...]</code> adds further readable roots.</li>
+</ul>
+<p>So <code>'jail'</code> is the right default for <strong>scripts</strong> run from a stylesheet
+directory — the root is just your assets. It is a trap for <strong>applications
+and services</strong> whose process CWD is the project root: untrusted Less can
+then <code>data-uri("config/secrets.env")</code> and exfiltrate any file under that
+root into the compiled CSS (it still cannot escape via <code>..</code> or absolute
+paths). For an application compiling Less you do not control:</p>
+<ul>
+<li>pass an explicit <code>filename</code> so the root is the stylesheet directory, <strong>and</strong></li>
+<li>use <code>file_io='deny'</code> (or <code>Lessish.hardened()</code>) so no disk read happens at all.</li>
+</ul>
+<p>Opt into <code>'allow'</code> only when the Less is trusted and needs
+less.js-compatible filesystem access (the <strong>CLI</strong> does this — an explicit,
+interactive invocation — and suppresses the warning itself).</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">lessish</span><span class="w"> </span><span class="kn">import</span> <span class="n">Lessish</span><span class="p">,</span> <span class="n">SecurityError</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">ls</span> <span class="o">=</span> <span class="n">Lessish</span><span class="p">()</span>  <span class="c1"># jail by default</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">src</span> <span class="o">=</span> <span class="s1">&#39;.a { background: data-uri(&quot;/etc/hostname&quot;); }&#39;</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="c1"># Even the default jail blocks the absolute read; &#39;deny&#39; blocks every sink.</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="k">try</span><span class="p">:</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="n">ls</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">file_io</span><span class="o">=</span><span class="s1">&#39;deny&#39;</span><span class="p">)</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    <span class="n">blocked</span> <span class="o">=</span> <span class="kc">False</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="k">except</span> <span class="n">SecurityError</span><span class="p">:</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    <span class="n">blocked</span> <span class="o">=</span> <span class="kc">True</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="k">assert</span> <span class="n">blocked</span>
+</span></code></pre></div>
+<p><code>SecurityError</code> is a subclass of <code>LessError</code>, so a single <code>except LessError</code>
+catches sandbox violations alongside parse and eval errors — see
+<a href="../05-errors/">05-errors.md</a>.</p>
+<h2 id="dos-limits">DoS limits</h2>
+<p>When compiling untrusted Less, several pathological inputs could otherwise
+burn unbounded CPU or memory. lessish bounds each; all are tunable per
+compile (or per instance):</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Guards against</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mixin_total_limit</code> / <code>mixin_depth_limit</code></td>
+<td>Runaway / exponential mixin expansion (<code>None</code> → built-in defaults: 50 000 / 1000). The count keeps ~10× headroom over the heaviest real-world stylesheet; pair it with <code>max_eval_seconds</code> for untrusted input (the count alone can let an exponential fan-out run a few seconds first).</td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>max_eval_seconds</code></td>
+<td>A wall-clock deadline checked <strong>throughout evaluation</strong> (the cycle trampoline, the per-declaration path, and mixin invocation) — interrupts both the exponential mixin case and a large flat mixin-free workload the count limit only catches after seconds. The one thing it can't interrupt is a single uninterruptible call (notably a catastrophic-backtracking <code>replace()</code> regex, which runs in C-level <code>re</code>). For untrusted regex, disable <code>replace</code> (it's in <code>RESTRICTED_FUNCTIONS</code>). Off by default; the count limit is the always-on guard.</td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>max_output_size</code></td>
+<td>Output amplification. A mixin body invoked enough times can emit megabytes while staying under the invocation count; this caps the emitted CSS in bytes and raises <code>EvalError</code> once crossed.</td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>max_input_size</code></td>
+<td>Unbounded parser input. The wall-clock deadline covers evaluation, but parsing runs first and is O(n) — a giant entry source or an <code>@import</code> fan-out of many files would lex/parse unbounded ahead of it. This caps the <strong>cumulative</strong> input (entry + every imported file) in characters, checked before each lex; an imported file whose on-disk byte size already exceeds the remaining budget is rejected without being read. Raises <code>ParseError</code> (anchored at the offending <code>@import</code>). It bounds <em>input only</em> — a tiny source can still expand via mixins, which is what the eval-time limits above catch.</td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>interp_expansion_limit</code></td>
+<td>Billion-laughs string interpolation (<code>@a: "@{b}@{b}"; …</code>). A single <code>@{var}</code> expansion past this many bytes raises <code>EvalError</code>.</td>
+<td><code>1_000_000</code></td>
+</tr>
+<tr>
+<td><code>replace_input_limit</code></td>
+<td><code>replace()</code> regex on oversized input. Patterns with nested unbounded quantifiers (<code>(a+)+</code>) <strong>or</strong> overlapping alternatives under a quantifier (<code>(a\|a)*</code>) are also rejected outright — Python's <code>re</code> has no backtracking budget.</td>
+<td><code>100_000</code></td>
+</tr>
+<tr>
+<td><code>range_max_elements</code></td>
+<td><code>range()</code> memory blow-up: <code>range(1e9)</code> would allocate a billion nodes, and <code>step &lt;= 0</code> would never terminate. Both trip this cap.</td>
+<td><code>1_000_000</code></td>
+</tr>
+</tbody>
+</table>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">lessish</span><span class="w"> </span><span class="kn">import</span> <span class="n">Lessish</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1"># Tighten the budgets for a hostile, low-trust workload.</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">ls</span> <span class="o">=</span> <span class="n">Lessish</span><span class="p">(</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="n">file_io</span><span class="o">=</span><span class="s1">&#39;deny&#39;</span><span class="p">,</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    <span class="n">mixin_total_limit</span><span class="o">=</span><span class="mi">10_000</span><span class="p">,</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    <span class="n">max_eval_seconds</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    <span class="n">max_output_size</span><span class="o">=</span><span class="mi">10_000_000</span><span class="p">,</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    <span class="n">interp_expansion_limit</span><span class="o">=</span><span class="mi">256_000</span><span class="p">,</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    <span class="n">replace_input_limit</span><span class="o">=</span><span class="mi">10_000</span><span class="p">,</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    <span class="n">range_max_elements</span><span class="o">=</span><span class="mi">10_000</span><span class="p">,</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="p">)</span>
+</span></code></pre></div>
+<h2 id="hardened-mode">Hardened mode</h2>
+<p>The limits above are <em>best-effort</em> bounds. One built-in resists them:
+<code>replace()</code> runs a user-supplied regex through Python's <code>re</code>, and
+catastrophic backtracking happens in C — it <strong>cannot</strong> be interrupted or
+time-bounded in pure stdlib. The pattern guard rejects nested unbounded
+quantifiers (<code>(a+)+</code>) and the common overlapping-alternation forms
+(<code>(a|a)*</code>, <code>(a|ab)+</code>), but ReDoS detection is undecidable in general — a
+constructed pattern can still slip past a structural check.</p>
+<p>When you need a hard guarantee rather than mitigation, disable the
+unbounded-risk functions outright with <code>disabled_functions</code>:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">lessish</span><span class="w"> </span><span class="kn">import</span> <span class="n">Lessish</span><span class="p">,</span> <span class="n">RESTRICTED_FUNCTIONS</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">ls</span> <span class="o">=</span> <span class="n">Lessish</span><span class="p">(</span><span class="n">file_io</span><span class="o">=</span><span class="s1">&#39;deny&#39;</span><span class="p">,</span> <span class="n">disabled_functions</span><span class="o">=</span><span class="n">RESTRICTED_FUNCTIONS</span><span class="p">)</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># A disabled function now raises UnsupportedFeatureError at compile:</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="c1">#   ls.compile(&#39;.a { x: replace(&quot;y&quot;, &quot;z&quot;, &quot;w&quot;); }&#39;)  -&gt; UnsupportedFeatureError</span>
+</span></code></pre></div>
+<ul>
+<li><strong><code>RESTRICTED_FUNCTIONS</code></strong> is <code>{'replace', 'range'}</code> — the built-ins whose
+  DoS risk isn't fully boundable by validation. You can pass your own set
+  instead (names are case-insensitive). A name that isn't a real built-in
+  raises <code>ValueError</code> rather than silently disabling nothing.</li>
+<li>This is a <strong>deliberate degradation of Less support</strong>: source that calls a
+  disabled function fails with <code>UnsupportedFeatureError</code> rather than
+  compiling. The trade is "less LESS coverage" for "no unbounded-risk code
+  path runs".</li>
+<li>It is <strong>off by default</strong> — out of the box you get the full less.js
+  function set. Enable it explicitly for untrusted input.</li>
+<li>File-reading functions (<code>data-uri</code>, <code>image-size</code>, <code>image-width</code>,
+  <code>image-height</code>) are <strong>not</strong> in <code>RESTRICTED_FUNCTIONS</code>; they are governed
+  by <a href="#file_io-sandbox"><code>file_io</code></a> — set <code>file_io='deny'</code> to block them.</li>
+</ul>
+<h3 id="one-preset-lessishhardened">One preset: <code>Lessish.hardened()</code></h3>
+<p>Untrusted-input safety needs several independent switches set together —
+<code>file_io='deny'</code>, <code>disabled_functions</code>, <code>neutralize_escape</code>, and the
+wall-clock / output budgets. <code>Lessish.hardened()</code> bundles all of them so you
+can't forget one:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">lessish</span><span class="w"> </span><span class="kn">import</span> <span class="n">Lessish</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">ls</span> <span class="o">=</span> <span class="n">Lessish</span><span class="o">.</span><span class="n">hardened</span><span class="p">()</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># Equivalent to:</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="c1">#   Lessish(file_io=&#39;deny&#39;, disabled_functions=RESTRICTED_FUNCTIONS,</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="c1">#           neutralize_escape=True, max_eval_seconds=10.0,</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="c1">#           max_output_size=50_000_000, max_input_size=10_000_000)</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="n">css</span> <span class="o">=</span> <span class="n">ls</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;@c: red; .a { color: @c; }&#39;</span><span class="p">)</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="c1"># =&gt; &#39;.a {\n  color: red;\n}\n&#39;</span>
+</span></code></pre></div>
+<p>Override any preset default with a keyword <em>here</em>: <code>Lessish.hardened(compress=True,
+max_eval_seconds=2.0)</code>.</p>
+<p>The six security-critical options — <code>file_io</code>, <code>disabled_functions</code>,
+<code>neutralize_escape</code>, <code>max_eval_seconds</code>, <code>max_output_size</code>, <code>max_input_size</code> —
+are then <strong>locked</strong>.
+A per-call <code>compile(**overrides)</code> may make any of them <em>stricter</em>, but an
+override that would <em>weaken</em> the sandbox raises <code>SecurityError</code> instead of
+silently widening it. This stops a config-derived options dict splatted into
+<code>compile()</code> from quietly defeating the preset:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">lessish</span><span class="w"> </span><span class="kn">import</span> <span class="n">Lessish</span><span class="p">,</span> <span class="n">SecurityError</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">ls</span> <span class="o">=</span> <span class="n">Lessish</span><span class="o">.</span><span class="n">hardened</span><span class="p">()</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1"># Tightening is fine — a shorter budget than the preset&#39;s 10s:</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="n">ls</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;.a { color: red; }&#39;</span><span class="p">,</span> <span class="n">max_eval_seconds</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="c1"># Weakening is refused:</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="k">try</span><span class="p">:</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>    <span class="n">ls</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;.a { color: red; }&#39;</span><span class="p">,</span> <span class="n">file_io</span><span class="o">=</span><span class="s1">&#39;allow&#39;</span><span class="p">)</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>    <span class="n">raised</span> <span class="o">=</span> <span class="kc">False</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="k">except</span> <span class="n">SecurityError</span><span class="p">:</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>    <span class="n">raised</span> <span class="o">=</span> <span class="kc">True</span>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="k">assert</span> <span class="n">raised</span>
+</span></code></pre></div>
+<p>If you genuinely need a looser policy, build a separate instance with that
+policy rather than overriding per call.</p>
+<p><code>neutralize_escape</code> closes an XSS shape: untrusted Less can place a literal
+<code>&lt;/style&gt;</code> into the output — through <code>e()</code> / <code>~"…"</code>, a plain quoted string,
+selector or property-name interpolation, or a comment. If you inline the
+compiled CSS into an HTML <code>&lt;style&gt;</code> block, any of those breaks out. With
+<code>neutralize_escape=True</code> every <code>&lt;/</code> in the final output is CSS-escaped to
+<code>\00003c/</code> — still valid CSS (a browser decodes <code>\00003c</code> back to <code>&lt;</code> inside
+strings, so <code>content: "&lt;/p&gt;"</code> renders unchanged), but no longer a sequence an
+HTML parser treats as a closing tag. The escape is applied at the emit sink,
+so it covers all output paths at once and leaves legitimate <code>&lt;</code> / <code>&gt;</code> — media
+query range operators (<code>width &lt; 600px</code>), <code>&lt;!--</code>, lone <code>&lt;</code> — untouched. Default
+<code>False</code> (less.js emits raw).</p>
+<h2 id="paths-and-import"><code>paths</code> and <code>@import</code></h2>
+<p><code>@import</code> resolution is filesystem-backed, so it's easiest to show on the
+CLI — see <a href="../../cli/#compile"><code>--paths</code> in the CLI reference</a>. In Python,
+pass <code>paths=['./mixins/', './vendor/']</code> and a <code>filename</code> so relative imports
+resolve from the right base directory.</p>
+<p>Prev: <a href="../01-quickstart/">← Quickstart</a> · Next: <a href="../03-source-maps/">Source maps →</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
